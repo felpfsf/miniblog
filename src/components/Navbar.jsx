@@ -3,17 +3,20 @@ import { NavLink } from 'react-router-dom'
 
 export const Navbar = () => {
   return (
-    <header className='w-full mx-auto py-4 px-16 bg-miniBlog-dark/70 flex items-center justify-between'>
+    <header className='w-full mx-auto py-4 px-16 bg-miniBlog-dark/70 flex flex-col sm:flex-row items-center justify-between'>
       <NavLink className='flex-grow' to={'/'}>
         <h1 className='text-2xl font-semibold'>miniBlog</h1>
       </NavLink>
-      <nav className='flex flex-1'>
+      <nav className='flex flex-1 mt-4 sm:mt-0'>
         <ul className='flex gap-6'>
           <li>
-            <NavLink to={'/'} className={({ isActive }) => isActive ? 'bg-white text-miniBlog-bg2 p-2' : 'text-white/60 p-2 transition-all duration-300'}>Home</NavLink>
+            <NavLink to={'/'} className={({ isActive }) => isActive ? 'bg-white text-miniBlog-bg2 p-2' : 'text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'}>Home</NavLink>
           </li>
           <li>
-            <NavLink to={'/about'} className={({ isActive }) => isActive ? 'bg-white text-miniBlog-bg2 p-2' : 'text-white/60 p-2 transition-all duration-300'}>About</NavLink>
+            <NavLink to={'/about'} className={({ isActive }) => isActive ? 'bg-white text-miniBlog-bg2 p-2' : 'text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'}>Sobre</NavLink>
+          </li>
+          <li>
+            <NavLink to={'/register'} className={({ isActive }) => isActive ? 'bg-white text-miniBlog-bg2 p-2' : 'text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'}>Registar</NavLink>
           </li>
         </ul>
       </nav>
