@@ -1,5 +1,5 @@
 export const Button = () => {
   return (
-    <button className='mt-4 py-2 px-4 bg-miniBlog-primary rounded self-center'>Confirmar</button>
+    <button className='mt-4 py-2 px-8 bg-miniBlog-primary rounded self-center hover:contrast-200 transition-color ease-in-out duration-300'>Confirmar</button>
   )
 }
