@@ -16,14 +16,17 @@ export const Form = () => {
       labelText: 'Nome de usuário:',
       inputName: 'login',
       inputType: 'text',
-      placeholder: 'Nome de usuário'
+      pattern: '^[a-zA-Z0-9](_(?!(\.|_))|\.(?!(_|\.))|[a-zA-Z0-9]){3,15}[a-zA-Z0-9]',
+      placeholder: 'Nome de usuário',
+      error_message: 'Seu nome precisa ter mais de 4 ou mais characteres, não pode começar com . ou _'
     },
     {
       id: 2,
       labelText: 'E-mail:',
       inputName: 'email',
       inputType: 'email',
-      placeholder: 'Seu e-mail'
+      placeholder: 'email@exemplo.com',
+      error_message: 'Email inválido'
     },
     {
       id: 3,
@@ -31,8 +34,11 @@ export const Form = () => {
       inputName: 'password',
       inputType: 'password',
       pattern:
-        '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,20}$',
-      placeholder: 'Sua senha'
+        'teste',
+      // pattern:
+      //   '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,20}$',
+      placeholder: 'Sua senha',
+      error_message: 'Senha precisa ter 8-20 caracteres e ter pelo menos 1 letra, 1 número e 1 caracter especial'
     },
     {
       id: 4,
@@ -40,7 +46,8 @@ export const Form = () => {
       inputName: 'confirmPassword',
       inputType: 'password',
       pattern: values.password,
-      placeholder: 'Confirme sua senha'
+      placeholder: 'Confirme sua senha',
+      error_message: 'Senha não confere'
     },
   ]
 
