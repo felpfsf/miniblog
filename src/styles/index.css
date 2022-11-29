@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 body {
-  @apply bg-miniBlog-bg2 text-white antialiased;
+  @apply bg-miniBlog-bg2 text-white font-poppins antialiased;
 }
