@@ -17,6 +17,7 @@ export const Form = () => {
       inputName: 'login',
       inputType: 'text',
       pattern: '^[a-zA-Z0-9](_(?!(\.|_))|\.(?!(_|\.))|[a-zA-Z0-9]){3,15}[a-zA-Z0-9]',
+      required: true,
       placeholder: 'Nome de usuário',
       error_message: 'Seu nome precisa ter mais de 4 ou mais characteres, não pode começar com . ou _'
     },
@@ -25,6 +26,7 @@ export const Form = () => {
       labelText: 'E-mail:',
       inputName: 'email',
       inputType: 'email',
+      required: true,
       placeholder: 'email@exemplo.com',
       error_message: 'Email inválido'
     },
@@ -37,6 +39,7 @@ export const Form = () => {
         'teste',
       // pattern:
       //   '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,20}$',
+      required: true,
       placeholder: 'Sua senha',
       error_message: 'Senha precisa ter 8-20 caracteres e ter pelo menos 1 letra, 1 número e 1 caracter especial'
     },
@@ -46,6 +49,7 @@ export const Form = () => {
       inputName: 'confirmPassword',
       inputType: 'password',
       pattern: values.password,
+      required: true,
       placeholder: 'Confirme sua senha',
       error_message: 'Senha não confere'
     },
@@ -69,7 +73,7 @@ export const Form = () => {
     })
   }
   return (
-    <form className='max-w-3xl mt-4 flex flex-col gap-4' onSubmit={handleSubmit}>
+    <form className='max-w-3xl w-full mt-4 flex flex-col gap-4' onSubmit={handleSubmit}>
       {inputForm.map(input => (
         <Input key={input.id} {...input} value={values[input.inputName]} onChange={onChangeHandler} />
       ))}
