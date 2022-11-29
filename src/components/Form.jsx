@@ -52,6 +52,15 @@ export const Form = () => {
     e.preventDefault()
     console.log(values)
   }
+
+  const clearInputs = () => {
+    setValues({
+      login: '',
+      email: '',
+      password: '',
+      confirmPassword: ''
+    })
+  }
   return (
     <form className='max-w-3xl mt-4 flex flex-col gap-4' onSubmit={handleSubmit}>
       {inputForm.map(input => (
