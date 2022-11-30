@@ -6,7 +6,6 @@ import { useAuthentication } from '../hooks/useAuthentication'
 export const Navbar = () => {
   const { user } = useAuthValue()
   const { logOut } = useAuthentication()
-  console.log(user);
   return (
     <header className='w-full mx-auto py-4 px-16 bg-miniBlog-dark/70 flex flex-col sm:flex-row items-center justify-between'>
       <NavLink className='flex-grow' to={'/'}>
@@ -23,7 +22,7 @@ export const Navbar = () => {
           {!user ?
             <>
               <li>
-                <NavLink to={'/register'} className={({ isActive }) => isActive ? 'bg-white text-miniBlog-bg2 p-2' : 'text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'}>Registar</NavLink>
+                <NavLink to={'/registrer'} className={({ isActive }) => isActive ? 'bg-white text-miniBlog-bg2 p-2' : 'text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'}>Registar</NavLink>
               </li>
               <li>
                 <NavLink to={'/login'} className={({ isActive }) => isActive ? 'bg-white text-miniBlog-bg2 p-2' : 'text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'}>Entrar</NavLink>
@@ -32,7 +31,7 @@ export const Navbar = () => {
             :
             <>
               <li>
-                <NavLink to={'/posts/create'} className={({ isActive }) => isActive ? 'bg-white text-miniBlog-bg2 p-2' : 'text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'}>Novo Post</NavLink>
+                <NavLink to={'/posts/create'} className={({ isActive }) => isActive ? 'bg-white text-miniBlog-bg2 p-2' : 'text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'}>Postar</NavLink>
               </li>
               <li>
                 <NavLink to={'/dashboard'} className={({ isActive }) => isActive ? 'bg-white text-miniBlog-bg2 p-2' : 'text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'}>Perfil</NavLink>
@@ -48,5 +47,3 @@ export const Navbar = () => {
     </header>
   )
 }
-
-// 'text-white font-bold border-b-2' : 'text-white/60 hover:text-white hover:border-b-2'

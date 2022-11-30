@@ -53,7 +53,7 @@ export const Router = () => {
                 : <Navigate to={'/'} />
             }
           />
-          <Route path='/register'
+          <Route path='/registrer'
             element={
               !user
                 ? <Register />
