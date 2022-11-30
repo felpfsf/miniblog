@@ -1,9 +1,12 @@
 import { NavLink } from 'react-router-dom'
 
 import { useAuthValue } from '../context/AuthContext'
+import { useAuthentication } from '../hooks/useAuthentication'
 
 export const Navbar = () => {
   const { user } = useAuthValue()
+  const { logOut } = useAuthentication()
+  console.log(user);
   return (
     <header className='w-full mx-auto py-4 px-16 bg-miniBlog-dark/70 flex flex-col sm:flex-row items-center justify-between'>
       <NavLink className='flex-grow' to={'/'}>
@@ -31,8 +34,10 @@ export const Navbar = () => {
               <li>
                 <NavLink to={'/dashboard'} className={({ isActive }) => isActive ? 'bg-white text-miniBlog-bg2 p-2' : 'text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'}>Perfil</NavLink>
               </li>
+              <li>
+                <NavLink to={''} onClick={logOut} className='text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'>Sair</NavLink>
+              </li>
             </>
-
           }
 
         </ul>
