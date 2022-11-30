@@ -1,15 +1,26 @@
 import { useState } from 'react'
+import { useAuthValue } from '../context/AuthContext'
+
+import { userInsertDoc } from '../hooks/useInsertData'
+
 import { Button } from './Button'
 import { Input } from './Input'
 import { TextArea } from './TextArea'
 
 export const PostForm = () => {
+  const { user } = useAuthValue()
+
+  const { insertDoc, response } = userInsertDoc('posts')
+
   const [values, setValues] = useState({
     postTitle: '',
     postImgUrl: '',
     postMessage: '',
     postTags: [''],
+    uid: user.uid,
+    createdBy: user.displayName
   })
+
 
   const onChangeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
@@ -18,6 +29,16 @@ export const PostForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(values);
+
+    /**
+     * Validar dados
+     * Criar array de tags
+     * check input
+     */
+
+    insertDoc(values)
+
+    // redirect to post
   }
 
   return (
@@ -57,7 +78,13 @@ export const PostForm = () => {
         onChange={onChangeHandler}
         error_message={'Insira uma imagem para o post'}
       />
-      <Button buttonText={'Postar'} />
+      <span className="text-xs font-semibold text-red-500 self-center">{response.error}</span>
+
+      {response.loading ?
+        <Button disabled={true} buttonText={'Aguarde'} />
+        :
+        <Button disabled={false} buttonText={'Postar'} />
+      }
     </form>
   )
 }
