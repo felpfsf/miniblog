@@ -25,6 +25,9 @@ export const Navbar = () => {
               <li>
                 <NavLink to={'/register'} className={({ isActive }) => isActive ? 'bg-white text-miniBlog-bg2 p-2' : 'text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'}>Registar</NavLink>
               </li>
+              <li>
+                <NavLink to={'/login'} className={({ isActive }) => isActive ? 'bg-white text-miniBlog-bg2 p-2' : 'text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'}>Entrar</NavLink>
+              </li>
             </>
             :
             <>
