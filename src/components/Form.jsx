@@ -1,4 +1,6 @@
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
+import { useAuthentication } from "../hooks/useAuthentication"
+
 import { Button } from "./Button"
 import { Input } from "./Input"
 
@@ -14,7 +16,7 @@ export const Form = () => {
     {
       id: 1,
       labelText: 'Nome de usuário:',
-      inputName: 'login',
+      inputName: 'displayName',
       inputType: 'text',
       pattern: '^[a-zA-Z0-9](_(?!(\.|_))|\.(?!(_|\.))|[a-zA-Z0-9]){3,15}[a-zA-Z0-9]',
       required: true,
@@ -35,8 +37,8 @@ export const Form = () => {
       labelText: 'Senha:',
       inputName: 'password',
       inputType: 'password',
-      pattern:
-        'teste',
+      // pattern:
+      //   'teste12',
       // pattern:
       //   '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,20}$',
       required: true,
@@ -55,29 +57,45 @@ export const Form = () => {
     },
   ]
 
+  const formRef = useRef(null)
+  const [error, setError] = useState(null)
+
+  const formReset = () => {
+    formRef.current.reset()
+  }
+
   const onChangeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const { createUser, error: authError, loading } = useAuthentication()
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    const res = await createUser(values)
     console.log(values)
+    setError('')
+    formReset()
   }
 
-  const clearInputs = () => {
-    setValues({
-      login: '',
-      email: '',
-      password: '',
-      confirmPassword: ''
-    })
-  }
+  useEffect(() => {
+    if (authError) {
+      setError(authError)
+    }
+  }, [authError])
+
   return (
-    <form className='max-w-3xl w-full mt-4 flex flex-col gap-4' onSubmit={handleSubmit}>
+    <form ref={formRef} className='max-w-3xl w-full mt-4 flex flex-col gap-4' onSubmit={handleSubmit}>
       {inputForm.map(input => (
         <Input key={input.id} {...input} value={values[input.inputName]} onChange={onChangeHandler} />
       ))}
-      <Button />
+      <span className="text-xs font-semibold text-red-500 self-center">{error}</span>
+
+      {loading ?
+        <Button disabled={true} buttonText={'Aguarde'} />
+        :
+        <Button disabled={false} buttonText={'Confirmar'} />
+      }
     </form>
   )
 }
