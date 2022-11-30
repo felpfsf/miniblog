@@ -45,11 +45,34 @@ export const useAuthentication = () => {
       let systemErrorMessage
 
       if (error.message.includes('Password')) {
-        systemErrorMessage = 'A senha precisa conter pelo menos 6 caracteres.'
+        systemErrorMessage = 'A senha precisa conter pelo menos 6 caracteres'
       } else if (error.message.includes('email-already')) {
         systemErrorMessage = 'E-mail já cadastrado'
       } else {
-        systemErrorMessage = 'Ocorreu um erro, tente mais tarde'
+        systemErrorMessage = 'Ocorreu um erro, tente novamente mais tarde'
+      }
+
+      setError(systemErrorMessage)
+    }
+    setLoading(false)
+  }
+
+  const logIn = async (data) => {
+    checkIfIsCancelled()
+    setLoading(true)
+    setError(null)
+
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password)
+    } catch (error) {
+      let systemErrorMessage
+
+      if (error.message.includes('user-not-found')) {
+        systemErrorMessage = 'Usuário não encontrado'
+      } else if (error.message.includes('wrong-password')) {
+        systemErrorMessage = 'Senha incorreta'
+      } else {
+        systemErrorMessage = 'Ocorreu um erro, tente novamente mais tarde'
       }
 
       setError(systemErrorMessage)
@@ -66,5 +89,5 @@ export const useAuthentication = () => {
     return () => setCancelled(true)
   }, [])
 
-  return { auth, createUser, error, loading, logOut }
+  return { auth, createUser, error, loading, logIn, logOut }
 }
