@@ -1,7 +1,9 @@
-import React from 'react'
 import { NavLink } from 'react-router-dom'
 
+import { useAuthValue } from '../context/AuthContext'
+
 export const Navbar = () => {
+  const { user } = useAuthValue()
   return (
     <header className='w-full mx-auto py-4 px-16 bg-miniBlog-dark/70 flex flex-col sm:flex-row items-center justify-between'>
       <NavLink className='flex-grow' to={'/'}>
@@ -15,9 +17,24 @@ export const Navbar = () => {
           <li>
             <NavLink to={'/about'} className={({ isActive }) => isActive ? 'bg-white text-miniBlog-bg2 p-2' : 'text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'}>Sobre</NavLink>
           </li>
-          <li>
-            <NavLink to={'/register'} className={({ isActive }) => isActive ? 'bg-white text-miniBlog-bg2 p-2' : 'text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'}>Registar</NavLink>
-          </li>
+          {!user ?
+            <>
+              <li>
+                <NavLink to={'/register'} className={({ isActive }) => isActive ? 'bg-white text-miniBlog-bg2 p-2' : 'text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'}>Registar</NavLink>
+              </li>
+            </>
+            :
+            <>
+              <li>
+                <NavLink to={'/posts/create'} className={({ isActive }) => isActive ? 'bg-white text-miniBlog-bg2 p-2' : 'text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'}>Novo Post</NavLink>
+              </li>
+              <li>
+                <NavLink to={'/dashboard'} className={({ isActive }) => isActive ? 'bg-white text-miniBlog-bg2 p-2' : 'text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'}>Perfil</NavLink>
+              </li>
+            </>
+
+          }
+
         </ul>
       </nav>
     </header>
