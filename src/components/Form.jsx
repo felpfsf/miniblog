@@ -75,7 +75,7 @@ export const Form = () => {
     const res = await createUser(values)
     console.log(values)
     setError('')
-    formReset()
+    // formReset()
   }
 
   useEffect(() => {
