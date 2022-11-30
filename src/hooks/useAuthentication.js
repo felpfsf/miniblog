@@ -1,13 +1,17 @@
+import { useEffect, useState } from 'react'
+
 import { db } from '../services/firebase'
 import {
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
   getAuth,
   signInWithEmailAndPassword,
+  signInWithPopup,
+  signInWithRedirect,
   signOut,
   updateProfile
 } from 'firebase/auth'
 
-import { useEffect, useState } from 'react'
 
 export const useAuthentication = () => {
   const [error, setError] = useState(null)
@@ -57,13 +61,37 @@ export const useAuthentication = () => {
     setLoading(false)
   }
 
-  const logIn = async (data) => {
+  const logIn = async data => {
     checkIfIsCancelled()
     setLoading(true)
     setError(null)
 
     try {
       await signInWithEmailAndPassword(auth, data.email, data.password)
+    } catch (error) {
+      let systemErrorMessage
+
+      if (error.message.includes('user-not-found')) {
+        systemErrorMessage = 'Usuário não encontrado'
+      } else if (error.message.includes('wrong-password')) {
+        systemErrorMessage = 'Senha incorreta'
+      } else {
+        systemErrorMessage = 'Ocorreu um erro, tente novamente mais tarde'
+      }
+
+      setError(systemErrorMessage)
+    }
+    setLoading(false)
+  }
+
+  const signInWithGoogle = async () => {
+    const googleProvider = new GoogleAuthProvider()
+    checkIfIsCancelled()
+    setLoading(true)
+    setError(null)
+
+    try {
+      await signInWithPopup(auth, googleProvider)
     } catch (error) {
       let systemErrorMessage
 
@@ -89,5 +117,5 @@ export const useAuthentication = () => {
     return () => setCancelled(true)
   }, [])
 
-  return { auth, createUser, error, loading, logIn, logOut }
+  return { auth, createUser, error, loading, logIn, logOut, signInWithGoogle }
 }
