@@ -7,7 +7,7 @@ export const Navbar = () => {
   const { user } = useAuthValue()
   const { logOut } = useAuthentication()
   return (
-    <header className='w-full mx-auto py-4 px-16 bg-miniBlog-dark/70 flex flex-col sm:flex-row items-center justify-between'>
+    <header className='w-full min-h-fit mx-auto py-4 px-16 bg-miniBlog-dark/70 flex flex-col sm:flex-row items-center justify-between'>
       <NavLink className='flex-grow' to={'/'}>
         <h1 className='text-2xl font-semibold'>miniBlog</h1>
       </NavLink>
