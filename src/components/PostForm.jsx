@@ -39,13 +39,13 @@ export const PostForm = () => {
      */
 
 
-    const tagsArray = values.postTags.split(',').map((tag) => tag.trim().toLowerCase())
+    const tags = values.postTags.split(',').map((tag) => tag.trim().toLowerCase())
 
     const postData = ({
       postTitle: values.postTitle,
       postImgUrl: values.postImgUrl,
       postMsg: values.postMsg,
-      tagsArray,
+      tags,
       uid: values.uid,
       createdBy: values.createdBy
     })
@@ -92,7 +92,7 @@ export const PostForm = () => {
         inputName={'postTags'}
         inputType={'text'}
         placeholder={'Insira as tags serparadas por vírgula'}
-        value={values.postImgUrl}
+        value={values.postTags}
         // pattern={'/\s*,\s*/'}
         onChange={onChangeHandler}
         error_message={'Utilize vírgulas para separar as tags'}
