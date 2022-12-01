@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export const Input = ({ labelText, inputName, inputType, placeholder, pattern, onChange, error_message }) => {
+export const Input = ({ labelText, inputName, inputType, placeholder, pattern, value, onChange, error_message }) => {
   const [focus, setFocus] = useState(false)
   return (
     <div className='flex flex-col gap-2'>
@@ -11,6 +11,7 @@ export const Input = ({ labelText, inputName, inputType, placeholder, pattern, o
         type={inputType}
         placeholder={placeholder}
         pattern={pattern}
+        value={value}
         onChange={onChange}
         required
         data-focus={focus.toString()}
