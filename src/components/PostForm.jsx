@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useAuthValue } from '../context/AuthContext'
 
 import { userInsertDoc } from '../hooks/useInsertData'
@@ -8,6 +9,7 @@ import { Input } from './Input'
 import { TextArea } from './TextArea'
 
 export const PostForm = () => {
+  const navigate = useNavigate()
   const { user } = useAuthValue()
 
   const { insertDoc, response } = userInsertDoc('posts')
@@ -15,8 +17,8 @@ export const PostForm = () => {
   const [values, setValues] = useState({
     postTitle: '',
     postImgUrl: '',
-    postMessage: '',
-    postTags: [''],
+    postMsg: '',
+    postTags: '',
     uid: user.uid,
     createdBy: user.displayName
   })
@@ -28,17 +30,30 @@ export const PostForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(values);
+    // console.log(values);
 
     /**
-     * Validar dados
-     * Criar array de tags
-     * check input
+     * Validar dados [checar o pattern]
+     * Criar array de tags [ok]
+     * check input [ok]
      */
 
-    insertDoc(values)
+
+    const tagsArray = values.postTags.split(',').map((tag) => tag.trim().toLowerCase())
+
+    const postData = ({
+      postTitle: values.postTitle,
+      postImgUrl: values.postImgUrl,
+      postMsg: values.postMsg,
+      tagsArray,
+      uid: values.uid,
+      createdBy: values.createdBy
+    })
+
+    insertDoc(postData)
 
     // redirect to post
+    navigate('/')
   }
 
   return (
@@ -49,6 +64,7 @@ export const PostForm = () => {
         inputType={'text'}
         placeholder={'Pense em um bom título'}
         value={values.postTitle}
+        // pattern={'^[A-Za-z/\s*]{3,}'}
         onChange={onChangeHandler}
         error_message={'Insira o titulo do post'}
       />
@@ -58,14 +74,16 @@ export const PostForm = () => {
         inputType={'text'}
         placeholder={'http://exemplo.com/imagem.jpg'}
         value={values.postImgUrl}
+        // pattern={'https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)'}
         onChange={onChangeHandler}
-        error_message={'Insira uma imagem para o post'}
+        error_message={'Insira uma URL válida para o post'}
       />
       <TextArea
         labelText={'Mensagem:'}
-        txtAreaName={'postMessage'}
+        txtAreaName={'postMsg'}
         placeholder={'Sobre o que você está pensando...'}
-        value={values.postMessage}
+        value={values.postMsg}
+        pattern={'^[A-Za-z]{3,}'}
         onChange={onChangeHandler}
         error_message={'Insira uma imagem para o post'}
       />
@@ -75,8 +93,9 @@ export const PostForm = () => {
         inputType={'text'}
         placeholder={'Insira as tags serparadas por vírgula'}
         value={values.postImgUrl}
+        // pattern={'/\s*,\s*/'}
         onChange={onChangeHandler}
-        error_message={'Insira uma imagem para o post'}
+        error_message={'Utilize vírgulas para separar as tags'}
       />
       <span className="text-xs font-semibold text-red-500 self-center">{response.error}</span>
 
