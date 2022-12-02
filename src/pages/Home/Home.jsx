@@ -12,7 +12,7 @@ export const Home = () => {
   console.log(posts)
 
   return (
-    <main className='max-w-[1440px] w-full min-h-[calc(100vh_-_208px)] mx-auto pt-16 px-4'>
+    <main className='max-w-[1440px] w-full min-h-[calc(100vh_-_208px)] mx-auto mb-4 pt-16 px-4'>
       <h1 className='text-xl font-black'>Veja os posts mais recentes</h1>
       <SearchForm />
       <div className='h-[1px] w-full my-4 bg-white/60'></div>
