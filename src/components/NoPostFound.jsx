@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 export const NoPostFound = () => {
   return (
-    <div className='w-full mt-4 mx-auto flex flex-col items-center'>
+    <div className='w-full mt-16 mx-auto flex flex-col items-center'>
       <h2 className='font-light'>Nenhum post encontrado</h2>
       <Link
         to={'/posts/create'}
