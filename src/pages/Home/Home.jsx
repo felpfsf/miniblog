@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import { NoPostFound } from '../../components/NoPostFound'
 import { PostCard } from '../../components/PostCard'
 import { SearchForm } from '../../components/SearchForm'
@@ -7,9 +5,6 @@ import { useFetchPosts } from '../../hooks/useFetchPosts'
 
 export const Home = () => {
   const { posts, loading } = useFetchPosts('posts')
-  // const [posts] = useState([])
-
-  console.log(posts)
 
   return (
     <main className='max-w-[1440px] w-full min-h-[calc(100vh_-_208px)] mx-auto mb-4 pt-16 px-4'>
@@ -24,7 +19,7 @@ export const Home = () => {
         ) : null}
       </div>
       {posts && posts.length === 0 ? (
-        <NoPostFound />
+        <NoPostFound buttonTitle={'Seja o primeiro a postar'}/>
       ) : null}
     </main>
   )
