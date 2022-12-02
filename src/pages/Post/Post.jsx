@@ -16,7 +16,7 @@ export const Post = () => {
 
   // console.log(post);
   return (
-    <main className="max-w-[1440px] w-full min-h-[calc(100vh_-_208px)] mx-auto pt-16 px-4">
+    <main className="max-w-[1440px] w-full min-h-[calc(100vh_-_208px)] mx-auto pt-16">
       {loading ? <h1 className="text-lg font-light">Carregando post...</h1> : null}
       {post && (
         <PostDetailed {...post} />
