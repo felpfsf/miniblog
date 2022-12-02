@@ -62,7 +62,7 @@ export const useFetchPosts = (docCollection, search = null, uid = null) => {
       }
     }
     loadData()
-  }, [cancelled, docCollection, posts, search, uid])
+  }, [cancelled, docCollection, search, uid])
 
   useEffect(() => {
     return () => setCancelled(true)
