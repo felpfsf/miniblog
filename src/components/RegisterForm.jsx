@@ -84,7 +84,7 @@ export const RegisterForm = () => {
   }, [authError])
 
   return (
-    <form ref={formRef} className='max-w-sm w-full mt-4 flex flex-col gap-4' onSubmit={handleSubmit}>
+    <form ref={formRef} className='max-w-lg w-full mt-4 flex flex-col gap-4' onSubmit={handleSubmit}>
       {inputForm.map(input => (
         <Input key={input.id} {...input} value={values[input.inputName]} onChange={onChangeHandler} />
       ))}
