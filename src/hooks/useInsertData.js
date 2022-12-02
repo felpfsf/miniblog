@@ -38,7 +38,6 @@ export const userInsertDoc = docCollection => {
   const insertDoc = async document => {
     checkIfIsCancelledBeforeDispatch({
       type: 'LOADING',
-      payload: insertDoc
     })
     try {
       const newDoc = { ...document, createdAt: Timestamp.now() }
