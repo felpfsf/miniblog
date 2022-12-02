@@ -17,6 +17,7 @@ export const PostForm = () => {
   const [values, setValues] = useState({
     postTitle: '',
     postImgUrl: '',
+    postHeadline:'',
     postMsg: '',
     postTags: '',
     uid: user.uid,
@@ -42,9 +43,10 @@ export const PostForm = () => {
     const tags = values.postTags.split(',').map((tag) => tag.trim().toLowerCase())
 
     const postData = ({
-      postTitle: values.postTitle,
-      postImgUrl: values.postImgUrl,
-      postMsg: values.postMsg,
+      title: values.postTitle,
+      imgUrl: values.postImgUrl,
+      headline: values.postHeadline,
+      message: values.postMsg,
       tags,
       uid: values.uid,
       createdBy: values.createdBy
@@ -57,7 +59,7 @@ export const PostForm = () => {
   }
 
   return (
-    <form className='max-w-sm w-full mt-4 mb-20 flex flex-col gap-4' onSubmit={handleSubmit}>
+    <form className='max-w-lg w-full mt-4 mb-20 flex flex-col gap-4' onSubmit={handleSubmit}>
       <Input
         labelText={'Título:'}
         inputName={'postTitle'}
@@ -75,6 +77,16 @@ export const PostForm = () => {
         placeholder={'http://exemplo.com/imagem.jpg'}
         value={values.postImgUrl}
         // pattern={'https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)'}
+        onChange={onChangeHandler}
+        error_message={'Insira uma URL válida para o post'}
+      />
+      <Input
+        labelText={'Uma manchete para seu post:'}
+        inputName={'postHeadline'}
+        inputType={'text'}
+        placeholder={'Pense em uma boa manchete'}
+        value={values.postHeadline}
+        // pattern={'^[A-Za-z/\s*]{3,}'}
         onChange={onChangeHandler}
         error_message={'Insira uma URL válida para o post'}
       />
