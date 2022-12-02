@@ -2,8 +2,10 @@ import { Link } from 'react-router-dom'
 
 import { HiOutlineArrowSmRight } from 'react-icons/hi'
 import { BsArrowRightShort } from 'react-icons/bs'
+import { CiEdit } from 'react-icons/ci'
+import { AiOutlineDelete } from 'react-icons/ai'
 
-export const PostCard = ({ headline, imgUrl, id, tags, title }) => {
+export const PostCard = ({ headline, imgUrl, id, tags, title, adminTools, onClick, editPage }) => {
   return (
     <div className='p-4 w-full md:w-1/3'>
       <div className='h-full border-2 border-miniBlog-bg3 rounded-lg overflow-hidden'>
@@ -39,6 +41,12 @@ export const PostCard = ({ headline, imgUrl, id, tags, title }) => {
               Leia mais
               <BsArrowRightShort size={24} className=' ml-2' />
             </Link>
+            <div className='flex items-center ml-auto md:ml-0 lg:ml-auto gap-3' style={adminTools ? { visibility: 'visible' } : { visibility: 'hidden' }}>
+              <Link to={editPage}>
+                <CiEdit className='hover:text-miniBlog-grass cursor-pointer' size={24} />
+              </Link>
+              <AiOutlineDelete className='hover:text-red-800 cursor-pointer' size={24} onClick={onClick} />
+            </div>
           </div>
         </div>
       </div>
