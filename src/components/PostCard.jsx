@@ -13,7 +13,7 @@ export const PostCard = ({ headline, imgUrl, id, tags, title }) => {
           alt={title}
         />
         <div className='p-6'>
-          <h2 className='tracking-widest text-xs title-font font-medium text-gray-500 uppercase mb-1'>
+          <h2 className='tracking-widest text-xs font-medium text-miniBlog-greySoft/70 uppercase mb-1'>
             Categoria
           </h2>
           <div className='flex gap-3 self-center'>
@@ -26,7 +26,7 @@ export const PostCard = ({ headline, imgUrl, id, tags, title }) => {
               </p>
             ))}
           </div>
-          <h1 className='title-font text-lg font-medium text-white my-3'>
+          <h1 className='text-lg font-medium my-3'>
             {title}
           </h1>
           <p className='text-white/60 leading-relaxed mb-3'>
