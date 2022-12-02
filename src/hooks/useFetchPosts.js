@@ -29,7 +29,16 @@ export const useFetchPosts = (docCollection, search = null, uid = null) => {
 
       try {
         let q
-        q = await query(collectionRef, orderBy('createdAt', 'desc'))
+
+        if (search) {
+          q = await query(
+            collectionRef,
+            where('tags', 'array-contains', search),
+            orderBy('createdAt', 'desc')
+          )
+        } else {
+          q = await query(collectionRef, orderBy('createdAt', 'desc'))
+        }
 
         await onSnapshot(q, QuerySnapshot => {
           setPosts(
@@ -47,7 +56,7 @@ export const useFetchPosts = (docCollection, search = null, uid = null) => {
       }
     }
     loadData()
-  }, [docCollection, search, uid, cancelled])
+  }, [cancelled, docCollection, posts, search, uid])
 
   useEffect(() => {
     return () => setCancelled(true)
