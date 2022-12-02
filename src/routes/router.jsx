@@ -15,6 +15,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { CreatePost } from '../pages/CreatePost/CreatePost'
 import { Dashboard } from '../pages/Dashboard/Dashboard'
 import { Login } from '../pages/Login/Login'
+import { Post } from '../pages/Post/Post'
 
 export const Router = () => {
   const [user, setUser] = useState(undefined)
@@ -40,6 +41,7 @@ export const Router = () => {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
+          <Route path='/posts/:id' element={<Post />} />
           <Route path='/dashboard'
             element={user
               ? <Dashboard />
