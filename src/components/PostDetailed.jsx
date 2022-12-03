@@ -1,4 +1,4 @@
-export const PostDetailed = ({ createdBy, imgUrl, message, title, tags }) => {
+export const PostDetailed = ({ createdBy, date, imgUrl, message, title, tags }) => {
   return (
     <div className='md:w-2/3 mb-4 mx-auto'>
       <div className="w-full">
@@ -8,7 +8,7 @@ export const PostDetailed = ({ createdBy, imgUrl, message, title, tags }) => {
           alt={title}
         />
         <div className="p-4">
-          <p className=" text-sm text-white/60 leading-[2px]">{createdBy}</p>
+          <p className=" text-sm text-white/60 leading-[2px]">{createdBy} / {date}</p>
           <h1 className="text-lg font-medium my-3">{title}</h1>
           <p className="text-sm text-white/80 text-justify">
             {message}
