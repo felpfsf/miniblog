@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-export const NoPostFound = ({ labe, buttonTitle, linkUrl }) => {
+export const NoPostFound = ({ label, buttonTitle, linkUrl }) => {
   return (
     <div className='w-full mt-16 mx-auto flex flex-col items-center'>
       <h2 className='font-light text-2xl'>Nenhum post encontrado</h2>
