@@ -12,9 +12,9 @@ export const SearchForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    console.log(searchTerm)
-    if (searchTerm) {
-      return navigate(`/search?q=${searchTerm}`)
+    const searchTermToLowerCase = searchTerm.toLowerCase()
+    if (searchTermToLowerCase) {
+      return navigate(`/search?q=${searchTermToLowerCase}`)
     }
   }
   return (
