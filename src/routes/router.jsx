@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { onAuthStateChanged } from 'firebase/auth'
 
 import { AuthProvider } from '../context/AuthContext'
 import { useAuthentication } from '../hooks/useAuthentication'
-
 
 import { Footer } from '../components/Footer'
 import { Navbar } from '../components/Navbar'
@@ -11,7 +11,6 @@ import { About } from '../pages/About/About'
 import { Home } from '../pages/Home/Home'
 import { NotFound } from '../pages/NotFound/NotFound'
 import { Register } from '../pages/Register/Register'
-import { onAuthStateChanged } from 'firebase/auth'
 import { CreatePost } from '../pages/CreatePost/CreatePost'
 import { Dashboard } from '../pages/Dashboard/Dashboard'
 import { Login } from '../pages/Login/Login'
