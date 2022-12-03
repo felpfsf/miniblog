@@ -33,7 +33,7 @@ export const useFetchPosts = (docCollection, search = null, uid = null) => {
         if (search) {
           q = await query(
             collectionRef,
-            where('tags', 'array-contains', search),
+            where('tags', 'array-contains', search.toLowerCase()),
             orderBy('createdAt', 'desc')
           )
         } else if(uid) {
