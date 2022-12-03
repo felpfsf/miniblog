@@ -1,9 +1,12 @@
+import { AnimatePresence, AnimateSharedLayout } from "framer-motion"
 import { Router } from "./routes/router"
 
 function App() {
   return (
     <>
-      <Router />
+      <AnimatePresence>
+        <Router />
+      </AnimatePresence>
     </>
   )
 }
