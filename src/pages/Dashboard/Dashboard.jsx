@@ -1,3 +1,4 @@
+import { LoadingSpinner } from '../../components/LoadingSpinner'
 import { NoPostFound } from '../../components/NoPostFound'
 import { PostCard } from '../../components/PostCard'
 
@@ -21,7 +22,7 @@ export const Dashboard = () => {
       <h2 className='text-xl font-light mt-2'>Bem vindo <span className='font-medium underline underline-offset-4'>{user.displayName}</span></h2>
       <div className='h-[1px] w-full my-4 bg-white/60'></div>
       {!loading ? (
-        <h1 className='text-2xl'>Carregando...</h1>
+        <LoadingSpinner label={'Carregando posts...'} /> 
       ) : (
         <>
           <div className='flex flex-wrap -m-4'>

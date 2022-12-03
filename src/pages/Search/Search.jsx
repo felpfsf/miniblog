@@ -1,3 +1,4 @@
+import { LoadingSpinner } from '../../components/LoadingSpinner'
 import { NoPostFound } from '../../components/NoPostFound'
 import { PostCard } from '../../components/PostCard'
 import { useFetchPosts } from '../../hooks/useFetchPosts'
@@ -15,7 +16,7 @@ export const Search = () => {
 
       <div className='h-[1px] w-full my-4 bg-white/60'></div>
 
-      {!loading ? <h2>Carregando...</h2> : null}
+      {!loading ? <LoadingSpinner label={'Carregando...'} /> : null}
       <div className="flex flex-wrap -m-4">
         {posts ? posts.map(post =>
           <PostCard key={post.id} {...post} />
@@ -23,7 +24,7 @@ export const Search = () => {
       </div>
 
       {posts && posts.length === 0 ? (
-        <NoPostFound buttonTitle={'Retornar a home'} linkUrl='/'/>
+        <NoPostFound buttonTitle={'Retornar a home'} linkUrl='/' />
       ) : null}
     </main>
   )
