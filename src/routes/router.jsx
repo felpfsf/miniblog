@@ -17,6 +17,7 @@ import { Dashboard } from '../pages/Dashboard/Dashboard'
 import { Login } from '../pages/Login/Login'
 import { Post } from '../pages/Post/Post'
 import { Search } from '../pages/Search/Search'
+import { EditPost } from '../pages/EditPost/EditPost'
 
 export const Router = () => {
   const [user, setUser] = useState(undefined)
@@ -68,6 +69,13 @@ export const Router = () => {
             element={
               user
                 ? <CreatePost />
+                : <Navigate to={'/login'} />
+            }
+          />
+          <Route path='/posts/edit/:id'
+            element={
+              user
+                ? <EditPost />
                 : <Navigate to={'/login'} />
             }
           />
