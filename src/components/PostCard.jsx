@@ -18,7 +18,7 @@ export const PostCard = ({ headline, imgUrl, id, tags, title, adminTools, onClic
           <h2 className='tracking-widest text-xs font-medium text-miniBlog-greySoft/70 uppercase mb-1'>
             Categoria
           </h2>
-          <div className='flex gap-3 self-center'>
+          <div className='flex gap-3 self-center flex-wrap'>
             {tags.map((tag, index) => (
               <p
                 key={index}
