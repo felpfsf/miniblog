@@ -8,7 +8,7 @@ export const PostDetailed = ({ createdBy, date, imgUrl, message, title, tags }) 
           alt={title}
         />
         <div className="p-4">
-          <p className=" text-sm text-white/60 leading-[2px]">{createdBy} / {date}</p>
+          <p className=" text-sm text-white/60 leading-[2px] flex flex-wrap gap-4">{createdBy}<span className="hidden sm:inline-flex">{'/'}</span><span>{date}</span></p>
           <h1 className="text-lg font-medium my-3">{title}</h1>
           <p className="text-sm text-white/80 text-justify">
             {message}
