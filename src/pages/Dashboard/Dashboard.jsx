@@ -31,7 +31,7 @@ export const Dashboard = () => {
               <>
                 {posts
                   ? posts.map(post =>
-                    <PostCard key={post.id} {...post} adminTools={true} onClick={() => handleDeletePost(post.id)} editPage={''} />
+                    <PostCard key={post.id} {...post} adminTools={true} onClick={() => handleDeletePost(post.id)} editPage={`/posts/edit/${post.id}`} />
                   )
                   : null}
               </>
