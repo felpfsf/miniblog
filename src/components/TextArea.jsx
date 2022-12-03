@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export const TextArea = ({ labelText, txtAreaName, placeholder, onChange, error_message }) => {
+export const TextArea = ({ labelText, txtAreaName, placeholder, onChange, error_message, value }) => {
   const [focus, setFocus] = useState(false)
 
   return (
@@ -11,6 +11,7 @@ export const TextArea = ({ labelText, txtAreaName, placeholder, onChange, error_
         name={txtAreaName}
         placeholder={placeholder}
         onChange={onChange}
+        value={value}
         required
         data-focus={focus.toString()}
         onBlur={() => setFocus(!focus)}></textarea>
