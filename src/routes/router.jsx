@@ -18,6 +18,7 @@ import { Login } from '../pages/Login/Login'
 import { Post } from '../pages/Post/Post'
 import { Search } from '../pages/Search/Search'
 import { EditPost } from '../pages/EditPost/EditPost'
+import { LoadingSpinner } from '../components/LoadingSpinner'
 
 export const Router = () => {
   const [user, setUser] = useState(undefined)
@@ -32,7 +33,7 @@ export const Router = () => {
   }, [auth])
 
   if (loadingUser) {
-    return <p>Carregando...</p>
+    return <LoadingSpinner label={'Carregando a página'} />
   }
 
 
