@@ -25,7 +25,6 @@ export const Post = () => {
   const dateConvertedLocale = fbBaseTime.toLocaleDateString(locale, options)
   console.log(dateConvertedLocale.toLocaleUpperCase(locale))
 
-  // console.log(post);
   return (
     <motion.main
       initial={{ opacity: 0 }}
@@ -39,4 +38,3 @@ export const Post = () => {
     </motion.main>
   )
 }
-// (post.createdAt).toLocaleDateString()
