@@ -13,11 +13,12 @@ export const PostForm = () => {
   const { user } = useAuthValue()
 
   const { insertDoc, response } = userInsertDoc('posts')
+  const [count, setCount] = useState(0)
 
   const [values, setValues] = useState({
     postTitle: '',
     postImgUrl: '',
-    postHeadline:'',
+    postHeadline: '',
     postMsg: '',
     postTags: '',
     uid: user.uid,
@@ -27,18 +28,11 @@ export const PostForm = () => {
 
   const onChangeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
+    setCount({ [e.target.name]: e.target.value.length })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // console.log(values);
-
-    /**
-     * Validar dados [checar o pattern]
-     * Criar array de tags [ok]
-     * check input [ok]
-     */
-
 
     const tags = values.postTags.split(',').map((tag) => tag.trim().toLowerCase())
 
@@ -54,10 +48,9 @@ export const PostForm = () => {
 
     insertDoc(postData)
 
-    // redirect to post
     navigate('/')
   }
-
+  console.log(count.postMsg);
   return (
     <form className='max-w-lg w-full mt-4 mb-20 flex flex-col gap-4' onSubmit={handleSubmit}>
       <Input
@@ -66,17 +59,20 @@ export const PostForm = () => {
         inputType={'text'}
         placeholder={'Pense em um bom título'}
         value={values.postTitle}
-        // pattern={'^[A-Za-z/\s*]{3,}'}
+        pattern={'.{6,50}$'}
+        maxLength={50}
+        chars={count.postTitle}
+        showCharLimit={false}
         onChange={onChangeHandler}
-        error_message={'Insira o titulo do post'}
+        error_message={'O título precisa ter entre 6 a 50 caracteres'}
       />
       <Input
         labelText={'URL da imagem:'}
         inputName={'postImgUrl'}
         inputType={'text'}
-        placeholder={'http://exemplo.com/imagem.jpg'}
+        placeholder={'https://exemplo.com/imagem.jpg'}
         value={values.postImgUrl}
-        // pattern={'https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)'}
+        pattern={'https?://.+'}
         onChange={onChangeHandler}
         error_message={'Insira uma URL válida para o post'}
       />
@@ -86,18 +82,24 @@ export const PostForm = () => {
         inputType={'text'}
         placeholder={'Pense em uma boa manchete'}
         value={values.postHeadline}
-        // pattern={'^[A-Za-z/\s*]{3,}'}
+        pattern={'.{6,100}$'}
+        maxLength={100}
+        chars={count.postHeadline}
+        showCharLimit={false}
         onChange={onChangeHandler}
-        error_message={'Insira uma URL válida para o post'}
+        error_message={'Atente ao limite de 6 a 100 characteres'}
       />
       <TextArea
         labelText={'Mensagem:'}
         txtAreaName={'postMsg'}
         placeholder={'Sobre o que você está pensando...'}
         value={values.postMsg}
-        pattern={'^[A-Za-z]{3,}'}
+        pattern={'.{6,700}$'}
+        chars={count.postMsg}
+        maxLength={700}
+        showCharLimit={false}
         onChange={onChangeHandler}
-        error_message={'Insira uma imagem para o post'}
+        error_message={'Limite de 700 characteres atingido'}
       />
       <Input
         labelText={'Tags:'}
@@ -105,9 +107,9 @@ export const PostForm = () => {
         inputType={'text'}
         placeholder={'Insira as tags serparadas por vírgula'}
         value={values.postTags}
-        // pattern={'/\s*,\s*/'}
+        // pattern={'^\s*\w+(?:\s*,\s*\w+)*\s*$'}
         onChange={onChangeHandler}
-        error_message={'Utilize vírgulas para separar as tags'}
+        error_message={'Utilize vírgulas para separar as tags, evite utilizar espaços'}
       />
       <span className="text-xs font-semibold text-red-500 self-center">{response.error}</span>
 
