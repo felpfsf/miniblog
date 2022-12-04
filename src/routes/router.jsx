@@ -18,6 +18,7 @@ import { Post } from '../pages/Post/Post'
 import { Search } from '../pages/Search/Search'
 import { EditPost } from '../pages/EditPost/EditPost'
 import { LoadingSpinner } from '../components/LoadingSpinner'
+import { Test } from '../pages/test'
 
 export const Router = () => {
   const [user, setUser] = useState(undefined)
@@ -42,6 +43,7 @@ export const Router = () => {
         <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/test' element={<Test />} />
           <Route path='/about' element={<About />} />
           <Route path='/search' element={<Search />} />
           <Route path='/posts/:id' element={<Post />} />
