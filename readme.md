@@ -1,5 +1,7 @@
 # MiniBlog
 
+![image](/docs/miniblog-banner.png)
+
 ## Projeto
 
 Projeto desenvolvido no curso "React do Zero à Maestria"
