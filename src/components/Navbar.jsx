@@ -3,16 +3,15 @@ import { NavLink } from 'react-router-dom'
 import { useAuthValue } from '../context/AuthContext'
 import { useAuthentication } from '../hooks/useAuthentication'
 
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 import { HiOutlineBars3, HiOutlineXMark } from 'react-icons/hi2'
 import { useEffect, useRef, useState } from 'react'
 
 export const Navbar = () => {
-  const navLinks = [
-    { id: 1, label: 'Home', url: '/' },
-    { id: 1, label: 'Home', url: '/' },
-    { id: 1, label: 'Home', url: '/' },
-    { id: 1, label: 'Home', url: '/' },
-  ]
+  const swal = withReactContent(Swal)
+
   const { user } = useAuthValue()
   const { logOut } = useAuthentication()
   const [isNavOpen, setIsNavOpen] = useState(false)
@@ -22,10 +21,36 @@ export const Navbar = () => {
     setIsNavOpen(prev => !prev)
   }
 
+  const swalert = () => {
+    swal.fire({
+      title: 'Gostaria de sair?',
+      text: "Tem certeza que gostaria de efetuar logout?",
+      icon: 'warning',
+      color: '#fff',
+      background: '#2A2634',
+      backdrop: `
+        rgb(42 38 52 / 0.4)
+        no-repeat
+      `,
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#3B71FE',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logOut()
+        document.location.reload()
+
+      }
+    })
+  }
+
   const handleLogOut = () => {
-    logOut()
-    setIsNavOpen(prev => !prev)
-    document.location.reload()
+    swalert()
+    // logOut()
+    // setIsNavOpen(prev => !prev)
+    // document.location.reload()
   }
 
   useEffect(() => {
@@ -77,7 +102,7 @@ export const Navbar = () => {
                 <NavLink to={'/dashboard'} className={({ isActive }) => isActive ? 'text-3xl bg-white text-miniBlog-bg2 p-2' : 'text-3xl text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'} onClick={handleNavMenu}>Perfil</NavLink>
               </li>
               <li>
-                <NavLink to={''} onClick={handleLogOut} className='text-3xl text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'>Sair</NavLink>
+                <NavLink to={''} onClick={() => {handleLogOut(); setIsNavOpen(prev => !prev) }} className='text-3xl text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'>Sair</NavLink>
               </li>
             </>
           }
@@ -110,7 +135,7 @@ export const Navbar = () => {
                 <NavLink to={'/dashboard'} className={({ isActive }) => isActive ? 'bg-white text-miniBlog-bg2 p-2' : 'text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'}>Perfil</NavLink>
               </li>
               <li>
-                <NavLink to={''} onClick={logOut} className='text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'>Sair</NavLink>
+                <NavLink to={''} onClick={handleLogOut} className='text-white/60 p-2 transition-all duration-300 hover:bg-white hover:text-miniBlog-bg2'>Sair</NavLink>
               </li>
             </>
           }

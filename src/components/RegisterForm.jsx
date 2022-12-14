@@ -1,16 +1,30 @@
 import { useEffect, useRef, useState } from "react"
 import { useAuthentication } from "../hooks/useAuthentication"
 
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 import { Button } from "./Button"
 import { Input } from "./Input"
 
 export const RegisterForm = () => {
+  const swal = withReactContent(Swal)
+
   const [values, setValues] = useState({
     login: '',
     email: '',
     password: '',
     confirmPassword: '',
   })
+
+  const swalert = (icon, message) => {
+    swal.fire({
+      icon: icon,
+      title: message,
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
 
   const inputForm = [
     {
@@ -60,10 +74,6 @@ export const RegisterForm = () => {
   const formRef = useRef(null)
   const [error, setError] = useState(null)
 
-  const formReset = () => {
-    formRef.current.reset()
-  }
-
   const onChangeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
   }
@@ -72,14 +82,20 @@ export const RegisterForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const res = await createUser(values)
-    console.log(values)
+
+    try {
+      swalert('success', 'Cadastro efetuado com sucesso')
+      const res = await createUser(values)
+    } catch (err) { console.log(err) }
+    // console.log(values)
     setError('')
+
   }
 
   useEffect(() => {
     if (authError) {
       setError(authError)
+      swalert('error', `${authError}`)
     }
   }, [authError])
 

@@ -2,6 +2,9 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthValue } from '../context/AuthContext'
 
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 import { useUpdatePost } from '../hooks/useUpdatePost'
 
 import { Button } from './Button'
@@ -9,10 +12,13 @@ import { Input } from './Input'
 import { TextArea } from './TextArea'
 
 export const EditPostForm = ({ title, id, imgUrl, headline, message, tags }) => {
+  const swal = withReactContent(Swal)
+  const [count, setCount] = useState(0)
   const navigate = useNavigate()
   const { user } = useAuthValue()
   const { response, updatePost } = useUpdatePost('posts')
   const tagsJoined = tags.join(', ')
+
 
   const [values, setValues] = useState({
     postTitle: title,
@@ -23,6 +29,15 @@ export const EditPostForm = ({ title, id, imgUrl, headline, message, tags }) => 
     uid: user.uid,
     createdBy: user.displayName
   })
+
+  const swalert = (icon, message) => {
+    swal.fire({
+      icon: icon,
+      title: message,
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
 
   const onChangeHandler = e => {
     setValues({ ...values, [e.target.name]: e.target.value })
@@ -43,9 +58,20 @@ export const EditPostForm = ({ title, id, imgUrl, headline, message, tags }) => 
       createdBy: values.createdBy
     }
 
-    updatePost(postData, id)
+    try {
+      updatePost(postData, id)
+      swalert('success', 'Post editado com sucesso')
+    } catch (error) {
+      console.error(error)
+      swalert('error', 'Ocorreu um erro, tente mais tarde')
+    } finally {
+      setTimeout(() => {
+        navigate('/dashboard')
+      }, "1700")
+    }
 
-    navigate('/dashboard')
+
+
   }
 
   return (

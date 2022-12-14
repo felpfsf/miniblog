@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 import { useAuthValue } from '../context/AuthContext'
 
 import { userInsertDoc } from '../hooks/useInsertData'
@@ -9,6 +11,7 @@ import { Input } from './Input'
 import { TextArea } from './TextArea'
 
 export const PostForm = () => {
+  const swal = withReactContent(Swal)
   const navigate = useNavigate()
   const { user } = useAuthValue()
 
@@ -25,6 +28,14 @@ export const PostForm = () => {
     createdBy: user.displayName
   })
 
+  const swalert = (icon, message) => {
+    swal.fire({
+      icon: icon,
+      title: message,
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
 
   const onChangeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
@@ -46,11 +57,20 @@ export const PostForm = () => {
       createdBy: values.createdBy
     })
 
-    insertDoc(postData)
+    try {
+      insertDoc(postData)
+      swalert('success', 'Post criado com sucesso')
+    } catch (error) {
+      console.error(error)
+      swalert('error', 'Ocorreu um erro, tente mais tarde')
+    } finally {
+      setTimeout(() => {
+        navigate('/')
+      }, "1700")
+    }
 
-    navigate('/')
   }
-  console.log(count.postMsg);
+
   return (
     <form className='max-w-lg w-full mt-4 mb-20 flex flex-col gap-4' onSubmit={handleSubmit}>
       <Input
